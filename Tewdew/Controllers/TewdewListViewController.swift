@@ -11,16 +11,20 @@ import UIKit
 class TewdewListViewController: UITableViewController
 {
     
-    var itemArray = ["Kitchen", "Home","Work"]
+    var itemArray = [Items]()
     
     let defaults = UserDefaults.standard
+    
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
-            itemArray = items
-        }
+        
+        let newItems = Items()
+        newItems.title = "Go shopping"
+        itemArray.append(newItems)
+        
     }
 
     //MARK: - Tableview Datasource Methods
@@ -32,22 +36,27 @@ class TewdewListViewController: UITableViewController
     {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TewdewItemCell", for: indexPath)
         
-        cell.textLabel?.text = itemArray[indexPath.row]
+        let item = itemArray[indexPath.row]
         
+        cell.textLabel?.text = item.title
+        
+        if item.done == true{
+            cell.accessoryType = .checkmark
+        }else {
+            cell.accessoryType = .none
+        }
+       
         return cell
     }
     
     //MARK: - Tableview Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
-        if tableView.cellForRow(at: indexPath)?.accessoryType == .checkmark{
-            tableView.cellForRow(at: indexPath)?.accessoryType = .none
-        }else{
-            tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
-        }
+        saveItems()
+        
         tableView.deselectRow(at: indexPath, animated: true)
-        
         
     }
     //MARK: - Add New Items
@@ -58,9 +67,13 @@ class TewdewListViewController: UITableViewController
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
             //what happens when user clicks add item on UIAlert
-            self.itemArray.append(textField.text!)
-            self.defaults.set(self.itemArray, forKey: "TodoListArray")
-            self.tableView.reloadData()
+            let newItems = Items()
+            
+            newItems.title = textField.text!
+            
+            self.itemArray.append(newItems)
+
+            self.saveItems()
     
         }
         alert.addTextField { (alertTextField) in
@@ -70,6 +83,17 @@ class TewdewListViewController: UITableViewController
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
-    
+    func saveItems(){
+        let encoder = PropertyListEncoder()
+        
+        do{
+            let data = try encoder.encode(itemArray)
+            try data.write(to: dataFilePath!)
+        }
+        catch{
+            print("Error: \(error)")
+        }
+        tableView.reloadData()
+    }
 }
 
