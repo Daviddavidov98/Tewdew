@@ -21,10 +21,7 @@ class TewdewListViewController: UITableViewController
     {
         super.viewDidLoad()
         
-        let newItems = Items()
-        newItems.title = "Go shopping"
-        itemArray.append(newItems)
-        
+        loadItems()
     }
 
     //MARK: - Tableview Datasource Methods
@@ -91,9 +88,19 @@ class TewdewListViewController: UITableViewController
             try data.write(to: dataFilePath!)
         }
         catch{
-            print("Error: \(error)")
+            print("Error encoding data: \(error)")
         }
         tableView.reloadData()
+    }
+    func loadItems(){
+        if let data = try? Data(contentsOf: dataFilePath!){
+            let decoder = PropertyListDecoder()
+            do{
+                itemArray = try decoder.decode([Items].self, from: data)
+            }catch{
+                print("Error decoding data: \(error)")
+            }
+        }
     }
 }
 

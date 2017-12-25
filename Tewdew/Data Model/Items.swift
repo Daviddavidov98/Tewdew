@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Items: Encodable//it is now encodable (Must have standard data types
+class Items: Codable //it is now encodable, and Decodable (Must have standard data types
 {
     var title : String = ""
     var done : Bool = false
