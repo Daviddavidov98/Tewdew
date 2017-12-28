@@ -7,21 +7,29 @@
 //
 
 import UIKit
+import CoreData
 
 class TewdewListViewController: UITableViewController
 {
     
     var itemArray = [Items]()
     
-    let defaults = UserDefaults.standard
+    var selectedCategory : Category? {
+        didSet{
+            loadItems()
+        }
+    }
     
-    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    let defaults = UserDefaults.standard
+  
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        
+
         loadItems()
+        
     }
 
     //MARK: - Tableview Datasource Methods
@@ -49,6 +57,9 @@ class TewdewListViewController: UITableViewController
     //MARK: - Tableview Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
+        //context.delete(itemArray[indexPath.row])
+        //itemArray.remove(at: indexPath.row)
+        
         itemArray[indexPath.row].done = !itemArray[indexPath.row].done
         
         saveItems()
@@ -56,17 +67,20 @@ class TewdewListViewController: UITableViewController
         tableView.deselectRow(at: indexPath, animated: true)
         
     }
+   
     //MARK: - Add New Items
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem)
     {
         var textField = UITextField()
-        let alert = UIAlertController(title: "Add New TewDew Item", message: "", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add New Item", message: "", preferredStyle: .alert)
         
-        let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
+        let action = UIAlertAction(title: "Add", style: .default) { (action) in
             //what happens when user clicks add item on UIAlert
-            let newItems = Items()
-            
+           
+            let newItems = Items(context: self.context)
+            newItems.done = false
             newItems.title = textField.text!
+            newItems.parentCategory = self.selectedCategory
             
             self.itemArray.append(newItems)
 
@@ -80,27 +94,59 @@ class TewdewListViewController: UITableViewController
         alert.addAction(action)
         present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: - Saving and Loading
     func saveItems(){
-        let encoder = PropertyListEncoder()
-        
         do{
-            let data = try encoder.encode(itemArray)
-            try data.write(to: dataFilePath!)
-        }
-        catch{
-            print("Error encoding data: \(error)")
+            try context.save()
+        }catch{
+            print("Error saving data: \(error)")
         }
         tableView.reloadData()
     }
-    func loadItems(){
-        if let data = try? Data(contentsOf: dataFilePath!){
-            let decoder = PropertyListDecoder()
-            do{
-                itemArray = try decoder.decode([Items].self, from: data)
-            }catch{
-                print("Error decoding data: \(error)")
-            }
+    func loadItems(with request: NSFetchRequest<Items> = Items.fetchRequest(), predicate: NSPredicate? = nil){
+        
+        let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
+        
+        if let additionalPredicate = predicate{
+            
+            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+        } else {
+            request.predicate = categoryPredicate
+        }
+    
+        do{
+            itemArray = try context.fetch(request)
+        }catch{
+            print("Error fetching items \(error)")
         }
     }
 }
-
+//MARK: - Search Bar Methods
+extension TewdewListViewController: UISearchBarDelegate{
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        let request : NSFetchRequest<Items> = Items.fetchRequest()
+        
+        let predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
+        loadItems(with: request, predicate: predicate)
+        
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0{
+            
+            loadItems() //brings back original search results
+            
+            DispatchQueue.main.async {
+                
+                searchBar.resignFirstResponder() //gets rid of keyboard and leaves the searchbar
+                
+            }
+            
+        }
+    }
+}

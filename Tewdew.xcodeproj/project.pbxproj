@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2335E3CE1FEF4636005F02C2 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2335E3CD1FEF4636005F02C2 /* Items.swift */; };
+		236356B11FF346B9007D98E4 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236356B01FF346B9007D98E4 /* CategoryViewController.swift */; };
+		239D63021FF1ACEA0013AFE6 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 239D63001FF1ACEA0013AFE6 /* DataModel.xcdatamodeld */; };
 		23A236221FEDBDB600D9CC6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A236211FEDBDB600D9CC6C /* AppDelegate.swift */; };
 		23A236241FEDBDB600D9CC6C /* TewdewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A236231FEDBDB600D9CC6C /* TewdewListViewController.swift */; };
 		23A236271FEDBDB600D9CC6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23A236251FEDBDB600D9CC6C /* Main.storyboard */; };
@@ -16,7 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2335E3CD1FEF4636005F02C2 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		236356B01FF346B9007D98E4 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoryViewController.swift; path = Tewdew/Controllers/CategoryViewController.swift; sourceTree = SOURCE_ROOT; };
+		239D63011FF1ACEA0013AFE6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		23A2361E1FEDBDB600D9CC6C /* Tewdew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tewdew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23A236211FEDBDB600D9CC6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23A236231FEDBDB600D9CC6C /* TewdewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TewdewListViewController.swift; sourceTree = "<group>"; };
@@ -40,7 +42,7 @@
 		2335E3CF1FEF463E005F02C2 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				2335E3CD1FEF4636005F02C2 /* Items.swift */,
+				239D63001FF1ACEA0013AFE6 /* DataModel.xcdatamodeld */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -56,6 +58,7 @@
 		2335E3D21FEF469D005F02C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				236356B01FF346B9007D98E4 /* CategoryViewController.swift */,
 				23A236231FEDBDB600D9CC6C /* TewdewListViewController.swift */,
 			);
 			path = Controllers;
@@ -171,8 +174,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236356B11FF346B9007D98E4 /* CategoryViewController.swift in Sources */,
 				23A236241FEDBDB600D9CC6C /* TewdewListViewController.swift in Sources */,
-				2335E3CE1FEF4636005F02C2 /* Items.swift in Sources */,
+				239D63021FF1ACEA0013AFE6 /* DataModel.xcdatamodeld in Sources */,
 				23A236221FEDBDB600D9CC6C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -356,6 +360,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		239D63001FF1ACEA0013AFE6 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				239D63011FF1ACEA0013AFE6 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 239D63011FF1ACEA0013AFE6 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 23A236161FEDBDB600D9CC6C /* Project object */;
 }
