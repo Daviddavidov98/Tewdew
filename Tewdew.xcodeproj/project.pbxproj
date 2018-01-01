@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		153B0A0E0A0E38673E086F3E /* Pods_Tewdew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23CD31DB53FA5DE46EF9CB5A /* Pods_Tewdew.framework */; };
 		236356B11FF346B9007D98E4 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236356B01FF346B9007D98E4 /* CategoryViewController.swift */; };
-		239D63021FF1ACEA0013AFE6 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 239D63001FF1ACEA0013AFE6 /* DataModel.xcdatamodeld */; };
+		236356B51FF5D4E2007D98E4 /* Items.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236356B41FF5D4E2007D98E4 /* Items.swift */; };
+		236356B71FF5D4F1007D98E4 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 236356B61FF5D4F1007D98E4 /* Category.swift */; };
 		23A236221FEDBDB600D9CC6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A236211FEDBDB600D9CC6C /* AppDelegate.swift */; };
 		23A236241FEDBDB600D9CC6C /* TewdewListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A236231FEDBDB600D9CC6C /* TewdewListViewController.swift */; };
 		23A236271FEDBDB600D9CC6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23A236251FEDBDB600D9CC6C /* Main.storyboard */; };
@@ -20,7 +21,8 @@
 /* Begin PBXFileReference section */
 		0E7237CBEB3D37BF901371B6 /* Pods-Tewdew.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tewdew.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tewdew/Pods-Tewdew.release.xcconfig"; sourceTree = "<group>"; };
 		236356B01FF346B9007D98E4 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CategoryViewController.swift; path = Tewdew/Controllers/CategoryViewController.swift; sourceTree = SOURCE_ROOT; };
-		239D63011FF1ACEA0013AFE6 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		236356B41FF5D4E2007D98E4 /* Items.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Items.swift; sourceTree = "<group>"; };
+		236356B61FF5D4F1007D98E4 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		23A2361E1FEDBDB600D9CC6C /* Tewdew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tewdew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23A236211FEDBDB600D9CC6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23A236231FEDBDB600D9CC6C /* TewdewListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TewdewListViewController.swift; sourceTree = "<group>"; };
@@ -56,7 +58,8 @@
 		2335E3CF1FEF463E005F02C2 /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
-				239D63001FF1ACEA0013AFE6 /* DataModel.xcdatamodeld */,
+				236356B61FF5D4F1007D98E4 /* Category.swift */,
+				236356B41FF5D4E2007D98E4 /* Items.swift */,
 			);
 			path = "Data Model";
 			sourceTree = "<group>";
@@ -257,10 +260,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236356B51FF5D4E2007D98E4 /* Items.swift in Sources */,
 				236356B11FF346B9007D98E4 /* CategoryViewController.swift in Sources */,
 				23A236241FEDBDB600D9CC6C /* TewdewListViewController.swift in Sources */,
-				239D63021FF1ACEA0013AFE6 /* DataModel.xcdatamodeld in Sources */,
 				23A236221FEDBDB600D9CC6C /* AppDelegate.swift in Sources */,
+				236356B71FF5D4F1007D98E4 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,19 +449,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		239D63001FF1ACEA0013AFE6 /* DataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				239D63011FF1ACEA0013AFE6 /* DataModel.xcdatamodel */,
-			);
-			currentVersion = 239D63011FF1ACEA0013AFE6 /* DataModel.xcdatamodel */;
-			path = DataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 23A236161FEDBDB600D9CC6C /* Project object */;
 }
