@@ -16,6 +16,7 @@
 		23A236271FEDBDB600D9CC6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23A236251FEDBDB600D9CC6C /* Main.storyboard */; };
 		23A236291FEDBDB600D9CC6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23A236281FEDBDB600D9CC6C /* Assets.xcassets */; };
 		23A2362C1FEDBDB600D9CC6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23A2362A1FEDBDB600D9CC6C /* LaunchScreen.storyboard */; };
+		23A76346200AED5B00F354DA /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A76345200AED5B00F354DA /* SwipeTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		23A236281FEDBDB600D9CC6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23A2362B1FEDBDB600D9CC6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23A2362D1FEDBDB600D9CC6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23A76345200AED5B00F354DA /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		23CD31DB53FA5DE46EF9CB5A /* Pods_Tewdew.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tewdew.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		68A322185E654970B5413C11 /* Pods-Tewdew.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tewdew.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tewdew/Pods-Tewdew.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,6 +77,7 @@
 		2335E3D21FEF469D005F02C2 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				23A76345200AED5B00F354DA /* SwipeTableViewController.swift */,
 				236356B01FF346B9007D98E4 /* CategoryViewController.swift */,
 				23A236231FEDBDB600D9CC6C /* TewdewListViewController.swift */,
 			);
@@ -207,13 +210,17 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Tewdew/Pods-Tewdew-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -264,6 +271,7 @@
 				236356B11FF346B9007D98E4 /* CategoryViewController.swift in Sources */,
 				23A236241FEDBDB600D9CC6C /* TewdewListViewController.swift in Sources */,
 				23A236221FEDBDB600D9CC6C /* AppDelegate.swift in Sources */,
+				23A76346200AED5B00F354DA /* SwipeTableViewController.swift in Sources */,
 				236356B71FF5D4F1007D98E4 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,8 +8,9 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
-class CategoryViewController: UITableViewController {
+class CategoryViewController: SwipeTableViewController{
     
     let realm = try! Realm()
 
@@ -20,6 +21,10 @@ class CategoryViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        tableView.rowHeight = 80.0
+        
+        tableView.separatorStyle = .none
         
         loadCategories()
     
@@ -33,12 +38,14 @@ class CategoryViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-    
         cell.textLabel?.text = categoryArray?[indexPath.row].name ?? "No Categories Added Yet"
         
+        cell.backgroundColor = UIColor(hexString: categoryArray?[indexPath.row].color ?? "1D9BF6")
+       
         return cell
+        
     }
     
     //MARK: - Data Manipulation Methods
@@ -53,6 +60,7 @@ class CategoryViewController: UITableViewController {
             
             let newCategory = Category()
             newCategory.name = textField.text!
+            newCategory.color = UIColor.randomFlat.hexValue()
            
             self.save(Category: newCategory)
             
@@ -82,6 +90,20 @@ class CategoryViewController: UITableViewController {
         
         tableView.reloadData()
         
+    }
+    
+    //MARK: - Delete data
+    override func updateModel(at indexpath: IndexPath) {
+        
+        if let categoryForDeletion = categoryArray?[indexpath.row]{
+            do {
+                try realm.write {
+                    realm.delete(categoryForDeletion)
+                }
+            }catch{
+                print("Error Deleting Category \(error)")
+            }
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

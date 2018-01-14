@@ -8,9 +8,9 @@
 
 import UIKit
 import RealmSwift
+import ChameleonFramework
 
-class TewdewListViewController: UITableViewController
-{
+class TewdewListViewController: SwipeTableViewController {
     let realm = try! Realm()
     
     var items : Results<Items>?
@@ -25,6 +25,10 @@ class TewdewListViewController: UITableViewController
     {
         super.viewDidLoad()
 
+        tableView.rowHeight = 80.0
+        
+        tableView.separatorStyle = .none
+        
         loadItems()
         
     }
@@ -36,7 +40,7 @@ class TewdewListViewController: UITableViewController
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TewdewItemCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let item = items?[indexPath.row]{
             
@@ -118,15 +122,29 @@ class TewdewListViewController: UITableViewController
         tableView.reloadData()
         
     }
+   
+    //MARK: - Deleteing items
+    override func updateModel(at indexpath: IndexPath) {
+        if let itemForDeletion = items?[indexpath.row]{
+            do {
+                try realm.write {
+                    realm.delete(itemForDeletion)
+                }
+            }catch{
+                print("Error Deleting Item \(error)")
+            }
+        }
+        
+    }
+    
 }
+
 //MARK: - Search Bar Methods
 extension TewdewListViewController: UISearchBarDelegate{
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 
         items = items?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "title", ascending: true)
-        
-        
         
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
