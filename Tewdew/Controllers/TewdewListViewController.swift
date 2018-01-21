@@ -20,6 +20,7 @@ class TewdewListViewController: SwipeTableViewController {
             loadItems()
         }
     }
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad()
     {
@@ -31,8 +32,38 @@ class TewdewListViewController: SwipeTableViewController {
         
         loadItems()
         
+        tableView.separatorStyle = .none
+        
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) /* Appears right before view appears on screen*/{
+        if let colorHex = selectedCategory?.color{
+            
+            title = selectedCategory!.name
+            
+            guard let navBar = navigationController?.navigationBar else{fatalError("Navigation Bar Controller Does not exist")}
+            
+            if let navBarColor = UIColor(hexString: (colorHex)){
+                
+                navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)
+                
+                navBar.barTintColor = navBarColor
+                
+                searchBar.barTintColor = navBarColor
+                
+                navBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : ContrastColorOf(navBarColor, returnFlat: true)]
+                
+            }
+    
+        }
+    }
+    override func willMove(toParentViewController parent: UIViewController?) {
+        guard let originalColor = UIColor(hexString: "3EC6C2") else {fatalError()}
+        navigationController?.navigationBar.barTintColor = originalColor
+        navigationController?.navigationBar.tintColor = FlatWhite()
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: FlatWhite()]
+    }
+    
     //MARK: - Tableview Datasource Methods
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -46,6 +77,15 @@ class TewdewListViewController: SwipeTableViewController {
             
             cell.textLabel?.text = item.title
             
+            let percent = CGFloat(indexPath.row) / CGFloat(items!.count)
+ 
+            if let color = UIColor(hexString: selectedCategory!.color)?.darken(byPercentage: percent){
+                
+                cell.backgroundColor = color
+                cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+            
+            }
+            
             if item.done == true{
                 cell.accessoryType = .checkmark
             }else {
@@ -57,6 +97,7 @@ class TewdewListViewController: SwipeTableViewController {
 
         return cell
     }
+    
     
     //MARK: - Tableview Delegate Methods
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)

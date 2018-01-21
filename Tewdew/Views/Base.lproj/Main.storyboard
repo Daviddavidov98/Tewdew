@@ -34,7 +34,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="TewDew" id="cBV-8G-Qhl">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="cdC-sq-irc">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="P8z-91-tcX" id="ayY-Xe-nw6"/>
                             </connections>
@@ -81,12 +80,14 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Items" id="ukl-Mu-Psq">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="CRl-F3-6RI">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="addButtonPressed:" destination="evM-mt-VCf" id="CSZ-4i-5bc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="DSg-Nx-Z3j" id="pyc-jB-d10"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XO4-KP-Ha2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -97,10 +98,11 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Umr-wm-n8Z" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="blackTranslucent" id="YFl-2r-zhl">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="YFl-2r-zhl">
+                        <rect key="frame" x="0.0" y="20" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.49102608599999997" green="0.93636976520000004" blue="0.91475278510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
