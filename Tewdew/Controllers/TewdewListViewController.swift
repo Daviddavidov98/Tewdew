@@ -186,6 +186,7 @@ extension TewdewListViewController: UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 
         items = items?.filter("title CONTAINS[cd] %@", searchBar.text!).sorted(byKeyPath: "title", ascending: true)
+        tableView.reloadData()
         
     }
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
